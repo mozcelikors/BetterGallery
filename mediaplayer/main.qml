@@ -103,12 +103,7 @@ Window {
             highlightMoveVelocity: -1
             focus: (pageId==0)?true:false
             Keys.onPressed: (event)=>{
-                if (event.key === Qt.Key_Backspace)
-                {
-                     console.log("backspace");
-                     Qt.quit();
-                }
-                else if (event.key === Qt.Key_Return)
+                if (event.key === Qt.Key_Return)
                 {
                     console.log("enter");
                     if (pageId == 0)
