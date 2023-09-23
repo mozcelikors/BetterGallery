@@ -14,71 +14,47 @@ SCRIPTDIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
 
 ifs_backup=$IFS
 IFS=$(echo -en "\n\b")
-#STEAMUSERID=68460212 #should come from outside
+
+if [ -z "${STEAMUSERID}" ]; then
+    echo "STEAMUSERID is unset or set to the empty string. Please set this as environment variable next time."
+    STEAMUSERID=68460212
+fi
+
 STEAMAPPSDIR=/home/deck/.local/share/Steam/steamapps/
 SCREENSHOTSDIR=/home/deck/.local/share/Steam/userdata/$STEAMUSERID/760/remote
-ids=($(ls $STEAMAPPSDIR/*.acf | cut -d "_" -f 2 | cut -d "." -f 1)) # -> IDS
-names=($(ls $STEAMAPPSDIR/*.acf | xargs cat | grep "name" | cut -d '"' -f 4)) # -> Names
-
-get_name_from_id () {
-    idx=0
-    for str in ${ids[@]}; do
-        if [ $1 == $str ]; then
-            break
-        fi
-        idx=$((idx+1))
-    done
-    echo ${names[$idx]}
-}
-
-get_id_from_name () {
-    idx=0
-    for str in ${names[@]}; do
-        if [ $1 == $str ]; then
-            break
-        fi
-        idx=$((idx+1))
-    done
-    echo ${ids[$idx]}
-}
+ids=($(ls /home/deck/.local/share/Steam/userdata/$STEAMUSERID/760/remote)) # -> IDS
+names=($(ls /home/deck/.local/share/Steam/userdata/$STEAMUSERID/760/remote)) # -> Names
 
 list_screenshots_per_gameid(){
     ls -t $SCREENSHOTSDIR/$1/screenshots/*jpg
 }
 
-list_screenshots_per_gamename(){
-    id=`get_id_from_name $1`
-    ls -t $SCREENSHOTSDIR/$id/screenshots/*jpg
-}
-
-
 rm $SCRIPTDIR/out/names.txt
 rm $SCRIPTDIR/out/ids.txt
 rm -rf $SCRIPTDIR/out/bettergallery_gamedata
 mkdir -p $SCRIPTDIR/out/bettergallery_gamedata/
+mkdir -p $SCRIPTDIR/out/bettergallery_headers
 
-for ((i=0; i < ${#names[@]}; i++))
+
+#Download game headers
+for ((i=0; i < ${#ids[@]}; i++))
 do
-    echo "${names[$i]}" >> $SCRIPTDIR/out/names.txt
+    wget -nc -O $SCRIPTDIR/out/bettergallery_headers/${ids[$i]}.jpg https://steamcdn-a.akamaihd.net/steam/apps/${ids[$i]}/header.jpg
 done
 
+# Create ids.txt
 for ((i=0; i < ${#ids[@]}; i++))
 do
     echo "${ids[$i]}" >> $SCRIPTDIR/out/ids.txt
     list_screenshots_per_gameid ${ids[$i]} > $SCRIPTDIR/out/bettergallery_gamedata/${ids[$i]}.txt
 done
 
+#Download game names
+wget -nc -O $SCRIPTDIR/out/gamenames.json http://api.steampowered.com/ISteamApps/GetAppList/v0002/
+cat $SCRIPTDIR/out/gamenames.json | python -m json.tool > $SCRIPTDIR/out/gamenames_pretty.json
 
-#Usage examples
-#myvar=`get_name_from_id 236430`
-#echo $myvar
-
-#get_name_from_id 374320
-
-#get_id_from_name "DARK SOULS™ II"
-
-#list_screenshots_per_gameid `get_id_from_name "DARK SOULS™ II"`
-#list_screenshots_per_gamename "DARK SOULS™ II"
-
+# Get game names and construct names.txt
+export BETTERGALLERYDIR=$SCRIPTDIR
+cat $SCRIPTDIR/out/gamenames.json | python3 $SCRIPTDIR/load_game_names.py
 
 IFS=$ifs_backup

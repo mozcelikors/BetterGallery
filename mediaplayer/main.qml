@@ -12,7 +12,7 @@ import QtMultimedia
 Window {
     id: root
     width: 1280
-    height: 720
+    height: 800
     color: "#0b1524"
     visible: true
     title: qsTr("Multimedia Player")
@@ -97,7 +97,7 @@ Window {
             anchors.fill:parent
             anchors.leftMargin:100
             anchors.rightMargin:100
-            anchors.topMargin:200
+            anchors.topMargin:250
             orientation: ListView.Horizontal
             highlightMoveDuration: 100
             highlightMoveVelocity: -1
@@ -125,20 +125,21 @@ Window {
 
             delegate: Item {
                 id: item
-                width:200
-                height:225
+                width:460
+                height:215
                 property int indexOfThisDelegate: index
 
                 Column {
-                    scale: (games.currentIndex === item.indexOfThisDelegate)?1.3:0.8
+                    scale: (games.currentIndex === item.indexOfThisDelegate)?1.2:0.8
                     Image {
                        id: img
-                       source: "file://"+"/home/deck/.local/share/Steam/userdata/"+STEAMUSERID+"/config/grid/"+gameId+"p.jpg"
-                       width: 150*1.2
-                       height: 225*1.2
+                       source:  "file://"+BETTERGALLERYDIR+"/out/bettergallery_headers/"+gameId+".jpg"
+                       width: 460
+                       height: 215
                        onStatusChanged: {
                             if(img.status === Image.Error)
                             {
+                                //img.source = "file://"+"/home/deck/.local/share/Steam/userdata/"+STEAMUSERID+"/config/grid/"+gameId+".jpg"
                                 img.source = "file://"+BETTERGALLERYDIR+"/placeholder.png";
                             }
                        }
@@ -205,13 +206,13 @@ Window {
                 anchors.fill:parent
                 anchors.leftMargin:(pageId != 2)?100:0
                 anchors.rightMargin:(pageId != 2)?100:0
-                anchors.topMargin:(pageId != 2)?100:0
+                anchors.topMargin:(pageId != 2)?170:0
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapOneItem
                 highlightMoveDuration: 100
                 highlightMoveVelocity: -1
                 highlightRangeMode: ListView.StrictlyEnforceRange
-                spacing:(pageId != 2)?250:0
+                spacing:(pageId != 2)?100:0
                 function load (gameIdToBeLoaded){
                     var names, ids, i;
                     var ssPath = "file://"+BETTERGALLERYDIR+"/out/bettergallery_gamedata/"+gameIdToBeLoaded+".txt";
@@ -251,8 +252,8 @@ Window {
 
                 delegate: Item {
                     id: item1
-                    width:(pageId != 2)?640*0.5:1280
-                    height:(pageId != 2)?480*0.5:720
+                    width:(pageId != 2)?1280*0.4:1280
+                    height:(pageId != 2)?800*0.4:800
                     property int indexOfThisDelegate: index
                     Column {
                         scale: {
@@ -275,8 +276,8 @@ Window {
                         Image {
                            id: img1
                            source: "file://"+filePath
-                           width: (pageId != 2)?640*0.8:1280
-                           height: (pageId != 2)?480*0.8:720
+                           width: (pageId != 2)?1280*0.4:1280
+                           height: (pageId != 2)?800*0.4:800
 
                            MouseArea {
                                 anchors.fill:parent
