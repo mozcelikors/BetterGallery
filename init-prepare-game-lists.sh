@@ -47,7 +47,10 @@ for ((i=0; i < ${#ids[@]}; i++))
 do
     echo "${ids[$i]}" >> $SCRIPTDIR/out/ids.txt
     list_screenshots_per_gameid ${ids[$i]} > $SCRIPTDIR/out/bettergallery_gamedata/${ids[$i]}.txt
+    # Delete empty lines
+    sed -i '/^$/d' $SCRIPTDIR/out/bettergallery_gamedata/${ids[$i]}.txt
 done
+
 
 #Download game names
 wget -nc -O $SCRIPTDIR/out/gamenames.json http://api.steampowered.com/ISteamApps/GetAppList/v0002/

@@ -224,7 +224,7 @@ Window {
                     console.log("ssPath: " + ssPath);
                     console.log("ssFiles: " + ssFiles);
                     var ssFiles_arr = ssFiles.split('\n');
-                    for (i = 0; i < ssFiles_arr.length; i++)
+                    for (i = 0; i < ssFiles_arr.length - 1; i++)
                     {
                         //console.log(ssFiles_arr[i]);
                         screenshotsListModel.append({gameId: gameIdToBeLoaded*1, filePath:ssFiles_arr[i]});
