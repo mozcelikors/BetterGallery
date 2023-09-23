@@ -74,8 +74,8 @@ Window {
 
         Component.onCompleted: {
             var names, ids, i;
-            names = readTextFile("file://"+BETTERGALLERYDIR+"/out/names.txt")
-            ids = readTextFile("file://"+BETTERGALLERYDIR+"/out/ids.txt")
+            names = readTextFile("file://"+BETTERGALLERYDIR+"/out/names_sorted.txt")
+            ids = readTextFile("file://"+BETTERGALLERYDIR+"/out/ids_sorted.txt")
             var names_arr = names.split('\n');
             console.log(names_arr[2]);
             var ids_arr = ids.split('\n');

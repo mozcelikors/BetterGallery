@@ -51,6 +51,9 @@ do
     sed -i '/^$/d' $SCRIPTDIR/out/bettergallery_gamedata/${ids[$i]}.txt
 done
 
+# Clear previous sorted names and ids
+rm $SCRIPTDIR/out/ids_sorted.txt
+rm $SCRIPTDIR/out/names_sorted.txt
 
 #Download game names
 wget -nc -O $SCRIPTDIR/out/gamenames.json http://api.steampowered.com/ISteamApps/GetAppList/v0002/
