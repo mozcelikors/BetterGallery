@@ -140,7 +140,11 @@ Window {
                             if(img.status === Image.Error)
                             {
                                 //img.source = "file://"+"/home/deck/.local/share/Steam/userdata/"+STEAMUSERID+"/config/grid/"+gameId+".jpg"
-                                img.source = "file://"+BETTERGALLERYDIR+"/placeholder.png";
+                                //img.source = "file://"+BETTERGALLERYDIR+"/placeholder.png";
+                                var ssPath = "file://"+BETTERGALLERYDIR+"/out/bettergallery_gamedata/"+gameId+".txt";
+                                var ssFiles = readTextFile(ssPath)
+                                var ssFiles_arr = ssFiles.split('\n');
+                                img.source = "file://"+ssFiles_arr[0];
                             }
                        }
                        MouseArea {

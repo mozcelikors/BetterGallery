@@ -27,6 +27,7 @@ z = y["applist"].get("apps")
 
 i = 0
 for idx in ids:
+    names[i] = "Non-steam Game"
     res = None
     for sub in z:
         if sub['appid'] == int(idx):
