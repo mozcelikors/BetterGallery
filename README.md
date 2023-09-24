@@ -32,7 +32,20 @@ Now, Qt5 along with some build tools need to be installed on the SteamDeck with 
 ./prepare_environment.sh
 ```
 
-You should have a desktop icon for BetterGallery by now. Right click onto it and select "Add to Steam".
+You should have a desktop icon for BetterGallery by now. Change it if you used different installation directory. Replace the "Exec" and "Icon" paths with the correct ones.
+
+```
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=BetterGallery
+Comment=BetterGallery
+Exec=/run/media/mmcblk0p1/BetterGallery/run_better_gallery.sh
+Icon=/run/media/mmcblk0p1/BetterGallery/qtapplogo.png
+Type=Application
+
+```
+
+Right click onto it and select "Add to Steam".
 
 Now we are ready to copy our logo to the Steam app:
 

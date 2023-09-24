@@ -2,6 +2,6 @@
 [Desktop Entry]
 Name=BetterGallery
 Comment=BetterGallery
-Exec=/run/media/mmcblk0p1/QtApps/run_better_gallery.sh
-Icon=/run/media/mmcblk0p1/QtApps/qtapplogo.png
+Exec=/run/media/mmcblk0p1/BetterGallery/run_better_gallery.sh
+Icon=/run/media/mmcblk0p1/BetterGallery/qtapplogo.png
 Type=Application
