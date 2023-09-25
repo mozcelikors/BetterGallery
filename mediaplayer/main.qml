@@ -123,7 +123,6 @@ Window {
                 width:460
                 height:215
                 property int indexOfThisDelegate: index
-
                 Column {
                     scale: (games.currentIndex === item.indexOfThisDelegate)?1.2:0.8
                     Image {
@@ -131,6 +130,7 @@ Window {
                        source:  "file://"+BETTERGALLERYDIR+"/out/bettergallery_headers/"+gameId+".jpg"
                        width: 460
                        height: 215
+
                        onStatusChanged: {
                             if(img.status === Image.Error)
                             {
@@ -333,6 +333,52 @@ Window {
                                      pageId = 2;
                                 }
                            }
+                        }
+                        Item {
+                            width: 460
+                            height: 215
+                            opacity:(screenshots.currentIndex === item1.indexOfThisDelegate)?0.3:0.05
+                            Behavior on opacity {
+                                SpringAnimation {
+                                    spring:2;
+                                    damping: 0.2;
+                                }
+                            }
+                            Image {
+                                id: imgReflection1
+                                source: img1.source
+                                width: (pageId != 2)?1280*0.4:1280
+                                height: (pageId != 2)?800*0.4:800
+                                rotation:180
+
+                                mirror:true
+
+
+
+                                // QML Skew Transformation
+                                transform: Matrix4x4 {
+                                    property real a: Math.PI / 8 //-Math.sin(a)
+                                    matrix: Qt.matrix4x4(1, Math.tan(a),       0,      0,
+                                                         0,           1,       0,      0,
+                                                         0,           0,       1,      0,
+                                                         0,           0,       0,      1)
+                                }
+
+                                OpacityMask {
+                                    source: mask1
+                                    maskSource: imgReflection1
+                                }
+
+                                LinearGradient {
+                                    id: mask1
+                                    anchors.fill: parent
+                                    gradient: Gradient {
+                                        GradientStop { position: 0.2; color: "#0b1524"; }
+                                        GradientStop { position: 0.5; color: "#0b1524"; }
+                                        GradientStop { position: 0.9; color: "transparent"}
+                                    }
+                                }
+                            }
                         }
                     }
                 }
