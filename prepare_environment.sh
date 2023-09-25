@@ -15,13 +15,13 @@ sudo steamos-readonly disable
 sudo steamos-readonly status
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
-sudo pacman -Sy base-devel
+sudo pacman -Sy --noconfirm --needed base-devel
 sudo pacman -Sy --noconfirm --needed archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make pacman patch pkgconf sed sudo which
 sudo pacman -Sy --noconfirm --needed glibc hwinfo linux-api-headers qt5-base cmake
-sudo pacman -Sy cmake jsoncpp libuv rhash qt6-base qt6-5compat qt6-declarative qt6-multimedia qt6ct
-sudo pacman -Sy lib32-libglvnd libglvnd lib32-mesa
-sudo pacman -Sy glibc
-sudo pacman -Sy linux-api-headers linux-neptune-headers
+sudo pacman -Sy --noconfirm --needed cmake jsoncpp libuv rhash qt6-base qt6-5compat qt6-declarative qt6-multimedia qt6ct qt6-shadertools
+sudo pacman -Sy --noconfirm --needed lib32-libglvnd libglvnd lib32-mesa
+sudo pacman -Sy --noconfirm --needed glibc
+sudo pacman -Sy --noconfirm --needed linux-api-headers linux-neptune-headers
 sudo steamos-readonly enable
 
 

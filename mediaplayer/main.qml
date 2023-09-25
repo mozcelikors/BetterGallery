@@ -7,7 +7,7 @@ import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
-
+import Qt5Compat.GraphicalEffects
 
 Window {
     id: root
@@ -97,7 +97,7 @@ Window {
             anchors.fill:parent
             anchors.leftMargin:100
             anchors.rightMargin:100
-            anchors.topMargin:250
+            anchors.topMargin:220
             orientation: ListView.Horizontal
             highlightMoveDuration: 100
             highlightMoveVelocity: -1
@@ -155,6 +155,54 @@ Window {
                            }
                       }
                     }
+                    Item {
+                        opacity:(games.currentIndex === item.indexOfThisDelegate)?0.3:0.05
+                        width: 460
+                        height: 215
+                        Behavior on opacity {
+                            SpringAnimation {
+                                spring:2;
+                                damping: 0.2;
+                            }
+                        }
+                        Image {
+                            id: imgReflection
+                            source: img.source
+                            width: 460
+                            height: 215
+                            rotation:180
+
+                            mirror:true
+
+
+
+                            // QML Skew Transformation
+                            transform: Matrix4x4 {
+                                property real a: Math.PI / 8 //-Math.sin(a)
+                                matrix: Qt.matrix4x4(1, Math.tan(a),       0,      8,
+                                                     0,           3/4,     0,      8,
+                                                     0,           0,      3/4,     0,
+                                                     0,           0,       0,      1)
+                            }
+
+                            OpacityMask {
+                                source: mask
+                                maskSource: imgReflection
+                            }
+
+                            LinearGradient {
+                                id: mask
+                                anchors.fill: parent
+                                gradient: Gradient {
+                                    GradientStop { position: 0.2; color: "#0b1524"; }
+                                    GradientStop { position: 0.5; color: "#0b1524"; }
+                                    GradientStop { position: 0.9; color: "transparent"}
+                                }
+                            }
+                        }
+                    }
+
+
                     /*Text {
                         anchors.horizontalCenter: img.horizontalCenter
                         text: gameName
@@ -297,13 +345,14 @@ Window {
     }
 
     Text {
+        id: gameNameText
         text: gamesListModel.get(games.currentIndex).gameName
         color: "white"
-        opacity:(pageId<2)?0.4:0
+        opacity:(pageId<2)?0.7:0
         z:4
-        font.pixelSize:60
+        font.pixelSize:50
         anchors.bottom: mainRect.bottom
-        anchors.bottomMargin: 100
+        anchors.bottomMargin: 60
         anchors.horizontalCenter: mainRect.horizontalCenter
     }
 
