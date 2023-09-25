@@ -5,6 +5,8 @@ BetterGallery is a Qt5-based application for SteamDeck that lets you traverse th
 
 ![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview.png?raw=true)
 
+![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview2.png?raw=true)
+
 ## Installation Intstructions
 
 ### Mandatory Steps
