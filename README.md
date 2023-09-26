@@ -78,7 +78,9 @@ SCREENSHOTSDIR=/home/deck/.local/share/Steam/userdata/$STEAMUSERID/760/remote
 
 ## Controller Configuration
 
-`BetterGallery` application is optimized for keyboard inputs. However, SteamDeck allows us to customize layouts. For this application, we propose you use `Web Browser` layout but map following additional keys:
+`BetterGallery` application is optimized for keyboard inputs. However, SteamDeck allows us to customize layouts.
+
+For this application, we propose you use `Web Browser` layout but map following additional keys:
 
 ```
 A button => Keyboard Return/Enter

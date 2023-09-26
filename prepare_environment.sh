@@ -24,7 +24,6 @@ sudo pacman -Sy --noconfirm --needed glibc
 sudo pacman -Sy --noconfirm --needed linux-api-headers linux-neptune-headers
 sudo steamos-readonly enable
 
-
 ln -s $SCRIPTDIR/BetterGallery.desktop /home/deck/Desktop
 
 
@@ -32,9 +31,8 @@ ln -s $SCRIPTDIR/BetterGallery.desktop /home/deck/Desktop
 # TODO: Add to Steam from Command Line Interface ??
 #
 
-#
-# TODO: Add Controller Configuration via Script ??
-#
+# Add controller configuration
+$SCRIPTDIR/controller_config_install.sh
 
 chmod +x $SCRIPTDIR/build.sh
 cd $SCRIPTDIR
