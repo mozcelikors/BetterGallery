@@ -83,7 +83,11 @@ Window {
             console.log(ids_arr[2]);
             for (i = 0; i < names_arr.length; i++)
             {
-                gamesListModel.append({gameId: ids_arr[i]*1, gameName:names_arr[i]});
+                var ssPath = "file://"+BETTERGALLERYDIR+"/out/bettergallery_gamedata/"+ids_arr[i]+".txt";
+                var ssFiles = readTextFile(ssPath);
+
+                if (ssFiles !== "")
+                    gamesListModel.append({gameId: ids_arr[i]*1, gameName:names_arr[i]});
             }
 
         }
@@ -142,6 +146,10 @@ Window {
                                 var ssFiles = readTextFile(ssPath)
                                 var ssFiles_arr = ssFiles.split('\n');
                                 img.source = "file://"+ssFiles_arr[0];
+                                if (img.source == "file://") //Unable to retrieve even the screenshot path, then we need to remove this entry.
+                                {
+                                    gamesListModel.remove(index);
+                                }
                             }
                        }
                        MouseArea {
@@ -289,6 +297,19 @@ Window {
                         screenshots.currentIndex = previousIdx-1;
                     else
                         screenshots.currentIndex = 0;
+                    if (screenshotsListModel.count == 0)
+                    {
+                        // If there are no more screenshots, delete the game entry as well. No need to show it.
+                        gamesListModel.remove();
+                        for (var i=0; i < gamesListModel.count; i++)
+                        {
+                            if (gamesListModel.get(i).gameId === gameId)
+                            {
+                                gamesListModel.remove(i);
+                                pageId=0;
+                            }
+                        }
+                    }
                     screenshots.highlightMoveDuration = 100;
                 }
 
