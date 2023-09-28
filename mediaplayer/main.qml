@@ -148,7 +148,12 @@ Window {
                                 img.source = "file://"+ssFiles_arr[0];
                                 if (img.source == "file://") //Unable to retrieve even the screenshot path, then we need to remove this entry.
                                 {
+                                    var previousIdx = games.currentIndex;
                                     gamesListModel.remove(index);
+                                    if (previousIdx > 0)
+                                        games.currentIndex = previousIdx-1;
+                                    else
+                                        games.currentIndex = 0;
                                 }
                             }
                        }
@@ -300,12 +305,16 @@ Window {
                     if (screenshotsListModel.count == 0)
                     {
                         // If there are no more screenshots, delete the game entry as well. No need to show it.
-                        gamesListModel.remove();
                         for (var i=0; i < gamesListModel.count; i++)
                         {
                             if (gamesListModel.get(i).gameId === gameId)
                             {
+                                previousIdx = games.currentIndex;
                                 gamesListModel.remove(i);
+                                if (previousIdx > 0)
+                                    games.currentIndex = previousIdx-1;
+                                else
+                                    games.currentIndex = 0;
                                 pageId=0;
                             }
                         }
