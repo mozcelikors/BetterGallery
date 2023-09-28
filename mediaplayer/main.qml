@@ -1,4 +1,4 @@
-/**
+﻿/**
 * @author mozcelikors
 **/
 
@@ -8,6 +8,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtMultimedia
 import Qt5Compat.GraphicalEffects
+import com.bettergallery.helper
 
 Window {
     id: root
@@ -19,6 +20,10 @@ Window {
     //property alias source: mediaPlayer.source
 
     property int pageId:0
+
+    Helper {
+        id: helper
+    }
 
     function find (model, criteria)
     {
@@ -61,15 +66,12 @@ Window {
         opacity: (pageId==0)?1:0
         z:(pageId==0)?2:0
 
-
-
         Behavior on opacity {
             SpringAnimation {
                 spring:2;
                 damping:0.2;
             }
         }
-
 
         Component.onCompleted: {
             var names, ids, i;
@@ -115,7 +117,6 @@ Window {
                     }
                 }
             }
-
 
             delegate: Item {
                 id: item
@@ -260,6 +261,7 @@ Window {
                 highlightMoveVelocity: -1
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 spacing:(pageId != 2)?100:0
+
                 function load (gameIdToBeLoaded){
                     var names, ids, i;
                     var ssPath = "file://"+BETTERGALLERYDIR+"/out/bettergallery_gamedata/"+gameIdToBeLoaded+".txt";
@@ -273,10 +275,29 @@ Window {
                         screenshotsListModel.append({gameId: gameIdToBeLoaded*1, filePath:ssFiles_arr[i]});
                     }
                 }
+                function deleteCurrentScreenshot()
+                {
+                    screenshots.highlightMoveDuration = 1;
+                    var gameId = screenshotsListModel.get(screenshots.currentIndex).gameId;
+                    console.log("GAME ID "+gameId);
+                    helper.removeFile(gameId, screenshotsListModel.get(screenshots.currentIndex).filePath);
+                    var previousIdx = screenshots.currentIndex;
+                    screenshotsListModel.clear();
+                    screenshots.load(gameId);
+                    if (previousIdx > 0)
+                        screenshots.currentIndex = previousIdx-1;
+                    else
+                        screenshots.currentIndex = 0;
+                    screenshots.highlightMoveDuration = 100;
+                }
 
                 focus: (pageId==1 || pageId==2)?true:false
                 Keys.onPressed: (event)=>{
-                    if (event.key === Qt.Key_Backspace)
+                    if (event.key === Qt.Key_Delete)
+                    {
+                        deleteCurrentScreenshot();
+                    }
+                    else if (event.key === Qt.Key_Backspace)
                     {
                         if (pageId == 1)
                         {
@@ -357,15 +378,16 @@ Window {
     }
 
     Text {
+        id: xText
         text: (pageId == 0)?"✖":"↩"
         color: "white"
         opacity:(pageId >= 0) ?0.7:0
         z:4
         font.pixelSize:50
         anchors.bottom: mainRect.bottom
-        anchors.bottomMargin: 30
+        anchors.bottomMargin: 50
         anchors.left: mainRect.left
-        anchors.leftMargin: 30
+        anchors.leftMargin: 60
         MouseArea
         {
             anchors.fill:parent
@@ -380,6 +402,25 @@ Window {
                 }
                 if (pageId > 0)
                     pageId = pageId - 1;
+            }
+        }
+    }
+
+    Text {
+        text: "🗑"
+        color: "white"
+        opacity:(pageId == 1)?0.7:0
+        z:4
+        font.pixelSize:40
+        anchors.bottom: mainRect.bottom
+        anchors.right: mainRect.right
+        anchors.rightMargin: 60
+        anchors.bottomMargin: 50
+        MouseArea
+        {
+            anchors.fill:parent
+            onClicked: {
+                screenshots.deleteCurrentScreenshot();
             }
         }
     }

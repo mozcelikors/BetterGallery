@@ -12,13 +12,19 @@ set(INSTALL_EXAMPLEDIR "${INSTALL_EXAMPLESDIR}/multimedia/video/mediaplayer")
 
 find_package(Qt6 REQUIRED COMPONENTS Core Quick QuickControls2 Svg)
 
-qt_add_executable(mediaplayer
-    main.cpp
-)
 
 set(resource_files
     "main.qml"
 )
+
+
+qt_add_executable(mediaplayer
+    main.cpp
+    helper.cpp
+    helper.h
+)
+
+
 
 qt_add_resources(mediaplayer "mediaplayer"
     PREFIX
@@ -26,6 +32,7 @@ qt_add_resources(mediaplayer "mediaplayer"
     FILES
         ${resource_files}
 )
+
 
 target_link_libraries(mediaplayer PRIVATE
     Qt6::Core

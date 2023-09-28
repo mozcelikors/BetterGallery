@@ -7,6 +7,7 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <QQmlContext>
+#include "helper.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
     engine.rootContext()->setContextProperty("STEAMUSERID", qgetenv("STEAMUSERID"));
     engine.rootContext()->setContextProperty("BETTERGALLERYDIR", qgetenv("BETTERGALLERYDIR"));
+
+    qmlRegisterType<Helper>("com.bettergallery.helper", 1, 0, "Helper");
+
     qputenv("QML_XHR_ALLOW_FILE_READ", QByteArray("1"));
     qputenv("QML_XHR_ALLOW_FILE_WRITE", QByteArray("1"));
     engine.load(url);
