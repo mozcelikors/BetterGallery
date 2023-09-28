@@ -125,6 +125,7 @@ Window {
                 property int indexOfThisDelegate: index
                 Column {
                     scale: (games.currentIndex === item.indexOfThisDelegate)?1.2:0.8
+
                     Image {
                        id: img
                        source:  "file://"+BETTERGALLERYDIR+"/out/bettergallery_headers/"+gameId+".jpg"
@@ -260,7 +261,7 @@ Window {
                 highlightMoveDuration: 100
                 highlightMoveVelocity: -1
                 highlightRangeMode: ListView.StrictlyEnforceRange
-                spacing:(pageId != 2)?100:0
+                spacing:(pageId != 2)?200:0
 
                 function load (gameIdToBeLoaded){
                     var names, ids, i;
@@ -323,7 +324,7 @@ Window {
                     width:(pageId != 2)?1280*0.4:1280
                     height:(pageId != 2)?800*0.4:800
                     property int indexOfThisDelegate: index
-                    Column {
+                    Item {
                         scale: {
                             if (pageId == 2){
                                 return 1.0;
@@ -341,11 +342,22 @@ Window {
                             }
                         }
 
+                        Rectangle
+                        {
+                            id: borderRect
+                            color: "white"
+                            width: (pageId != 2)?1280*0.4:1280
+                            height: (pageId != 2)?800*0.4:800
+                            opacity:(screenshots.currentIndex === item1.indexOfThisDelegate)?0.2:0
+                        }
+
                         Image {
                            id: img1
                            source: "file://"+filePath
-                           width: (pageId != 2)?1280*0.4:1280
-                           height: (pageId != 2)?800*0.4:800
+                           width: (pageId != 2)?1280*0.4-10:1280
+                           height: (pageId != 2)?800*0.4-10:800
+                           anchors.centerIn: borderRect
+                           opacity:(screenshots.currentIndex === item1.indexOfThisDelegate)?1:0.6
 
                            MouseArea {
                                 anchors.fill:parent
@@ -354,7 +366,9 @@ Window {
                                      pageId = 2;
                                 }
                            }
+
                         }
+
                     }
                 }
             }
