@@ -3,9 +3,18 @@
 
 BetterGallery is a Qt5-based application for SteamDeck that lets you traverse through all of the screenshots of your games - unlike the stock SteamDeck Media gallery.
 
-![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview.png?raw=true)
+![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview_imgs/preview.png?raw=true)
 
-![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview2.png?raw=true)
+![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview_imgs/preview2.png?raw=true)
+
+![BetterGallery](https://github.com/mozcelikors/BetterGallery/blob/main/preview_imgs/preview3.png?raw=true)
+
+## Features
+
+* BetterGallery lets you quickly traverse through all your screenshots with ease.
+* Downloads game header images automatically on first launch (might take a while).
+* Full screen in handheld mode is supported (1280x800).
+* Ability to select and remove screenshots.
 
 ## Installation Intstructions
 
