@@ -37,7 +37,7 @@ git clone https://github.com/mozcelikors/BetterGallery
 cd BetterGallery
 ```
 
-Now, Qt5 along with some build tools need to be installed on the SteamDeck with the following command. You will be prompted to enter your password and also you will need to confirm packages by pressing Enter.
+Now, Qt5 along with some build tools need to be installed on the SteamDeck with the following command. You will be prompted to enter your password. For about 4-5 times package manager will ask you to enter packages to install. You just need to press "Enter" each time this is asked to install all packages.
 
 ```
 ./prepare_environment.sh
