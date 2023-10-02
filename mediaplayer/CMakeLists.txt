@@ -22,6 +22,7 @@ qt_add_executable(mediaplayer
     main.cpp
     helper.cpp
     helper.h
+    vdf_parser.hpp
 )
 
 

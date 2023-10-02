@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QString>
 
+
 class Helper : public QObject
 {
     Q_OBJECT
