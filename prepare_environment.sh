@@ -15,10 +15,12 @@ sudo steamos-readonly disable
 sudo steamos-readonly status
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
-sudo pacman -Sy base-devel
-sudo pacman -Sy archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make pacman patch pkgconf sed sudo which glibc hwinfo linux-api-headers qt5-base cmake jsoncpp libuv rhash glibc linux-api-headers linux-neptune-headers
-sudo pacman -Sy qt6-base qt6-5compat qt6-declarative qt6-multimedia qt6ct qt6-shadertools
-sudo pacman -Sy mesa glu mesa-unstable mesa-utils mesa-vdpau lib32-mesa lib32-mesa-vdpau lib32-libglvnd libglvnd
+sudo pacman -S --overwrite \* fakeroot
+sudo pacman -Sy --needed base-devel
+sudo pacman -Sy --needed archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make pacman patch pkgconf sed sudo which glibc hwinfo linux-api-headers qt5-base cmake jsoncpp libuv rhash glibc linux-neptune-headers
+sudo pacman -Sy --needed qt6-base qt6-5compat qt6-declarative qt6-multimedia qt6ct qt6-shadertools
+sudo pacman -Sy --needed mesa glu mesa-unstable mesa-utils mesa-vdpau lib32-mesa lib32-mesa-vdpau lib32-libglvnd libglvnd
+sudo pacman -Syu glibc linux-api-headers
 sudo steamos-readonly enable
 
 ln -s $SCRIPTDIR/BetterGallery.desktop /home/deck/Desktop
