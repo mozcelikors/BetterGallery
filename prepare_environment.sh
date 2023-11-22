@@ -17,6 +17,8 @@ sudo steamos-readonly status
 sudo rm -rf /etc/pacman.d/gnupg
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
+sudo pacman-key --populate holo
+echo "y" | sudo pacman -Scc
 sudo pacman -S --noconfirm --overwrite \* fakeroot
 sudo pacman -Sy --noconfirm base-devel
 sudo pacman -Sy --noconfirm archlinux-keyring autoconf automake binutils bison debugedit fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make pacman patch pkgconf sed sudo which glibc hwinfo linux-api-headers qt5-base cmake jsoncpp libuv rhash glibc linux-neptune-headers
